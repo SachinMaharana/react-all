@@ -1,3 +1,3 @@
-React Started Package Created From Package.
+React Starter Package Created From scratch.
 Keeping track of the moving parts.
 Will keep on adding things i learn and do.
