@@ -1,33 +1,29 @@
-let path = require('path');
+var webpack = require('webpack');
+var path = require('path');
 
-let config = {
-    context: path.join(__dirname, 'src'),
-    entry: [
-        './main.js',
-    ],
-    output : {
-        path: path.join(__dirname, 'www'),
+var BUILD = path.resolve(__dirname + '/www')
+var APP = path.resolve(__dirname + '/src')
+
+var config = {
+    entry: ['webpack-dev-server/client?http://localhost:8080', 'webpack/hot/only-dev-server', APP + '/main.jsx'],
+    output: {
+        path: BUILD,
         filename: 'bundle.js'
     },
-    module : {
-        loaders: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loaders: ['babel'],
-            },
-        ],
-    },
-    resolveLoader: {
-        root: [
-            path.join(__dirname, 'node_modules')
-        ],
-    },
     resolve: {
-        root: [
-            path.join(__dirname , 'node_modules')
-        ],
-    },
-};
+   extensions: ['', '.js', '.jsx']
+ },
+    plugins: [
+  new webpack.HotModuleReplacementPlugin(),
+  new webpack.NoErrorsPlugin()
+],
+    module: {
+        loaders: [{
+            test: /\.jsx?/,
+            include: APP,
+            loaders: ['react-hot', 'babel']
+        }]
+    }
+}
 
 module.exports = config;
